@@ -16,7 +16,7 @@ use "http://localhost:8000/callback" as the OAuth Callback URL.
 ## Configuration
 
 Note the client id for your application, and set it up as an environment variable "CLIENTID". You may also choose a local user id
-and set it up as USERID. If this is not defined, "sample_user" is used.
+and set it up as USERID. If this is not defined, "sample_id" is used.
 
 ## Running the application
 
