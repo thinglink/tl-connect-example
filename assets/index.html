@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>Thinglink Connect Example</title>
+    </head>
+    <body>
+        <div style="margin: 20px">
+            <img src="gfx/sample.jpg" style="float:left; margin: 0 30px">
+
+            <p>
+                This page demonstrates how you can install Thinglink Connect
+                on your own website.  We have an image on the left that
+                you wish to Thinglink-enable.
+            </p>
+            <p>
+                First, we add the tlconnect.js like this by putting it at the end of
+                the site, just before the closing &lt;/body&gt;-tag.
+                <pre>
+                &lt;script src="http://www.thinglink.com/jse/tlconnect.js"&gt;&lt;/script&gt;
+                </pre>
+                After this we set it up by calling TLC.init() like this:
+                <pre>
+                &lt;script&gt;
+                        TLC.init({
+                            client: '{{.ClientID}}',
+                            user: '{{.UserID}}',
+                            isOwner:true,
+                            redirectUri: '{{.RedirectURI}}'
+                        })
+                &lt;/script&gt;
+                </pre>
+            </p>
+            <p>
+                Whichever class has the designation "thinglinkConnect" will
+                then receive the "log in with Thinglink-button". See below.
+            </p>
+            <div class="thinglinkConnect"></div>
+        </div>
+        <script src="http://www.thinglink.com/jse/tlconnect.js"></script>
+        <script>
+            TLC.init({
+                client: '{{.ClientID}}',
+                user: '{{.UserID}}',
+                isOwner:true,
+                redirectUri: '{{.RedirectURI}}',
+                complete: function(data) {
+                    // Is the user currently actively logged in at Thinglink?
+                    if( data.loggedIn )
+                        console.log("User is currently logged in")
+                    else
+                        console.log("User is not logged in yet")
+
+                    // Do the login data and our knowledge
+                    // of the client_id/user_id combination match? If no,
+                    // whoever this is, they will not receive edit rights
+                    // to the images.
+                    if( data.owner )
+                        console.log("This user does have edit rights")
+                    else
+                        console.log("This user does not have edit rights")
+                }
+            })
+        </script>
+    </body>
+</html>
